@@ -8,30 +8,45 @@ wordList = [
     "java",
     "react",
     "angular"
-]
+];
 
 function start(wordList) {
-    console.log("you clicked on the button")
-    console.log()
+    createCardWords(wordList);
 }
 
 function createCardWords(wordList) {
-    copy = wordList
+    console.log(wordList)
+    if (!Array.isArray(wordList)) {  
+        console.error("Erreur : wordList doit être un tableau !");
+        return;
+    }
 
+    console.log("Création des cartes...\n");
+
+    const selected = selectRandomWords(wordList, 5);
+
+    selected.forEach(word => {
+        console.log(`Carte: ${word}`);
+    });
+
+    console.log("\nCartes générées !");
 }
 
-function shuffle(array) {
-    let currentIndex = array.length;
-  
-    // While there remain elements to shuffle...
-    while (currentIndex != 0) {
-  
-      // Pick a remaining element...
-      let randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-  
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+
+function selectRandomWords(array, n) {
+    const selectedWords = [];
+    const usedIndexes = new Set();
+    
+    while (selectedWords.length < n) {
+        const i = Math.floor(Math.random() * array.length);
+
+        if (!usedIndexes.has(i)) {
+            selectedWords.push(array[i]);
+            usedIndexes.add(i); 
+        }
     }
-  }
+
+    return selectedWords;
+}
+
+start(wordList);
