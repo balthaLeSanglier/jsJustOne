@@ -1,37 +1,25 @@
-console.log("hello")
 
-wordList = [
-    "javascript",
-    "golang",
-    "elm",
-    "gns",
-    "java",
-    "react",
-    "angular"
-]
 
-function start(wordList) {
-    console.log("you clicked on the button")
-    console.log()
+function startTimer(duration) {
+    return new Promise((resolve) => {
+        let seconds = duration;
+
+        const timer = setInterval(() => {
+            console.log(`${seconds} secondes restantes`);
+            seconds--;
+
+            if (seconds < 0) {
+                clearInterval(timer);
+                console.log("Temps écoulé !");
+                resolve();
+            }
+        }, 1000);
+    });
 }
 
-function createCardWords(wordList) {
-    copy = wordList
-
+async function start() {
+    console.log("Début du compte à rebours...");
+    await startTimer(5);
 }
 
-function shuffle(array) {
-    let currentIndex = array.length;
-  
-    // While there remain elements to shuffle...
-    while (currentIndex != 0) {
-  
-      // Pick a remaining element...
-      let randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-  
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-  }
+start();
