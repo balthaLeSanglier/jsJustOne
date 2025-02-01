@@ -1,4 +1,13 @@
 
+wordList = [
+    "javascript",
+    "golang",
+    "elm",
+    "gns",
+    "java",
+    "react",
+    "angular"
+];
 
 function startTimer(duration) {
     return new Promise((resolve) => {
@@ -10,7 +19,7 @@ function startTimer(duration) {
 
             if (seconds < 0) {
                 clearInterval(timer);
-                console.log("Temps écoulé !");
+                console.log("Temps écoulé !\n");
                 resolve();
             }
         }, 1000);
@@ -20,28 +29,10 @@ function startTimer(duration) {
 async function start() {
     console.log("Début du compte à rebours...");
     await startTimer(5);
-}
-
-start();
-
-console.log("hello")
-
-wordList = [
-    "javascript",
-    "golang",
-    "elm",
-    "gns",
-    "java",
-    "react",
-    "angular"
-];
-
-function start(wordList) {
     createCardWords(wordList);
 }
 
 function createCardWords(wordList) {
-    console.log(wordList)
     if (!Array.isArray(wordList)) {  
         console.error("Erreur : wordList doit être un tableau !");
         return;
