@@ -1,22 +1,3 @@
-//Readline est un module permettant l'interaction I/O
-const readline = require('readline');
-
-const lineReader = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-function askNumber(question) {
-    return new Promise((resolve) => {
-        lineReader.question(question, (answer) => {
-            lineReader.close()
-            resolve(answer);
-        });
-    });
-}
-
-
-
 wordList = [
     "javascript",
     "golang",
@@ -26,6 +7,24 @@ wordList = [
     "react",
     "angular"
 ];
+
+//Readline est un module permettant l'interaction I/O
+const readline = require('readline');
+
+
+
+function askNumber(question) {
+    return new Promise((resolve) => {
+        lineReader = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        })
+        lineReader.question(question, (answer) => {
+            resolve(answer);
+            lineReader.close()
+        });
+    });
+}
 
 function startTimer(duration) {
     return new Promise((resolve) => {
@@ -50,7 +49,37 @@ async function start() {
     wordToGuessList = createCardWords(wordList);
     nbOfNumber = await askNumber("Choisissez un nombre en 1 et 5 \n")
     wordToGuess = wordToGuessList[nbOfNumber-1]
-    console.log(wordToGuess)
+    console.log("Le mot choisi est : "+ wordToGuess)
+    console.log("C'est parti pour les indices !")
+    tipsList = await getFiveTips()
+}
+
+async function getFiveTips() {
+    let tips = [];
+
+    for (let i = 0; i < 5; i++) {
+        let tip = await getOneTip(i + 1);
+        tips.push(tip);
+    }
+    return tips;
+}
+
+async function getOneTip(index) {
+    return new Promise((resolve) => {
+        const lineReader = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+
+        lineReader.question(`Indice ${index} : `, (answer) => {
+            lineReader.close(); // Ferme readline après avoir reçu la réponse
+            for (let i = 0; i < 10; i++) {
+                console.log("")
+            }
+            resolve(answer);
+        });
+        
+    });
 }
 
 function createCardWords(wordList) {
