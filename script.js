@@ -13,7 +13,7 @@ const readline = require('readline');
 
 
 
-function askNumber(question) {
+function askQuestion(question) {
     return new Promise((resolve) => {
         lineReader = readline.createInterface({
             input: process.stdin,
@@ -47,7 +47,7 @@ async function start() {
     console.log("Début du compte à rebours...");
     await startTimer(5);
     wordToGuessList = createCardWords(wordList);
-    nbOfNumber = await askNumber("Choisissez un nombre en 1 et 5 \n")
+    nbOfNumber = await askQuestion("Choisissez un nombre en 1 et 5 \n")
     wordToGuess = wordToGuessList[nbOfNumber-1]
     console.log("Le mot choisi est : "+ wordToGuess)
     console.log("C'est parti pour les indices !")
@@ -55,9 +55,31 @@ async function start() {
     console.log("Okay, les indices sont collectés. Vérification des indices")
     tipsList = checkTipsLetters(tipsList)
     console.log(tipsList)
+    response = await askQuestion("Devinez le mot !!\n")
+    checkResponse(wordToGuess, response)
+}
+
+function checkResponse(wordToGuess, response) {
+    win = wordToGuess==response
+    if(win) {
+        console.log("BRAVO, c'est une victoire !")
+    }
+    else {
+        console.log("oh non, c'est perdu ...")
+    }
+}
+
+async function askGuess(){
+
 }
 
 function checkTipsLetters(tipsList) {
+    return tipsList.filter((el) => {
+        return tipsList.indexOf(el) === tipsList.lastIndexOf(el);
+    })
+}
+
+function checkTipsPronunciation(tipsList) {
     return tipsList.filter((el) => {
         return tipsList.indexOf(el) === tipsList.lastIndexOf(el);
     })
