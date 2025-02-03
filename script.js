@@ -52,6 +52,15 @@ async function start() {
     console.log("Le mot choisi est : "+ wordToGuess)
     console.log("C'est parti pour les indices !")
     tipsList = await getFiveTips()
+    console.log("Okay, les indices sont collectés. Vérification des indices")
+    tipsList = checkTipsLetters(tipsList)
+    console.log(tipsList)
+}
+
+function checkTipsLetters(tipsList) {
+    return tipsList.filter((el) => {
+        return tipsList.indexOf(el) === tipsList.lastIndexOf(el);
+    })
 }
 
 async function getFiveTips() {
