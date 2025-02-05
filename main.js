@@ -36,7 +36,14 @@ async function start() {
   
   let tipsList = await tips.getFiveTips();
   console.log("Okay, les indices sont collectés. Vérification des indices");
-  tipsList = tips.checkTipsLetters(tipsList);
+  try {
+        tipsList = await tips.checkTipsPrononciation(tipsList, wordToGuess);
+    } catch (error) {
+        //Sin la vérification de la prononciation est impossible (erreur réseau par exemple), on vérifie simplement l'orthographe
+        console.error("Erreur dans la vérification des prononciations :", error);
+        tipsList = tips.checkTipsLetters(tipsList);
+    }
+
   console.log("\nListe des indices : ");
   console.log(tipsList);
   
