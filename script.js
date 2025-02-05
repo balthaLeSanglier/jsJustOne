@@ -1,4 +1,4 @@
-wordList = [
+const wordList = [
     "javascript",
     "golang",
     "elm",
@@ -34,7 +34,7 @@ function startTimer(duration) {
             console.log(`${seconds} secondes restantes`);
             seconds--;
 
-            if (seconds < 0) {
+            if (seconds <= 0) {
                 clearInterval(timer);
                 console.log("Temps écoulé !\n");
                 resolve();
@@ -46,16 +46,25 @@ function startTimer(duration) {
 async function start() {
     console.log("Début du compte à rebours...");
     await startTimer(5);
-    wordToGuessList = createCardWords(wordList);
-    nbOfNumber = await askQuestion("Choisissez un nombre en 1 et 5 \n")
-    wordToGuess = wordToGuessList[nbOfNumber-1]
+    let wordToGuessList = createCardWords(wordList);
+    let nbOfNumber;
+    while (true) {
+        nbOfNumber = await askQuestion("Choisissez un nombre entre 1 et 5 : ");
+        nbOfNumber = parseInt(nbOfNumber, 10); 
+        if (!isNaN(nbOfNumber) && nbOfNumber >= 1 && nbOfNumber <= 5) {
+            break;
+        }
+        console.log("Entrée invalide. Veuillez entrer un nombre entre 1 et 5.");
+    }
+    let wordToGuess = wordToGuessList[nbOfNumber-1]
     console.log("Le mot choisi est : "+ wordToGuess)
     console.log("C'est parti pour les indices !")
-    tipsList = await getFiveTips()
+    let tipsList = await getFiveTips()
     console.log("Okay, les indices sont collectés. Vérification des indices")
     tipsList = checkTipsLetters(tipsList)
+    console.log("\nliste des indices : ")
     console.log(tipsList)
-    response = await askQuestion("Devinez le mot !!\n")
+    let response = await askQuestion("Devinez le mot !!\n")
     checkResponse(wordToGuess, response)
 }
 
@@ -74,9 +83,12 @@ async function askGuess(){
 }
 
 function checkTipsLetters(tipsList) {
-    return tipsList.filter((el) => {
-        return tipsList.indexOf(el) === tipsList.lastIndexOf(el);
-    })
+    const seen = new Set();
+    return tipsList.filter(el => {
+        if (seen.has(el)) return false;
+        seen.add(el);
+        return true;
+    });
 }
 
 function checkTipsPronunciation(tipsList) {
@@ -103,10 +115,8 @@ async function getOneTip(index) {
         });
 
         lineReader.question(`Indice ${index} : `, (answer) => {
-            lineReader.close(); // Ferme readline après avoir reçu la réponse
-            for (let i = 0; i < 10; i++) {
-                console.log("")
-            }
+            lineReader.close();
+            console.clear()
             resolve(answer);
         });
         
@@ -148,4 +158,4 @@ function selectRandomWords(array, n) {
     return selectedWords;
 }
 
-start(wordList);
+start();
