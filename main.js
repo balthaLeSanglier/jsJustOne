@@ -11,7 +11,15 @@ const wordList = [
   "gns",
   "java",
   "react",
-  "angular"
+  "angular",
+  "Chat", "Chien", "Cheval", "Oiseau", "Dauphin", "Renard", "Hibou", "Lézard", "Tortue", "Souris",
+  "Table", "Chaise", "Lampe", "Fenêtre", "Téléphone", "Ordinateur", "Clavier", "Miroir", "Livre", "Stylo",
+  "Pomme", "Poire", "Banane", "Chocolat", "Fromage", "Pain", "Lait", "Carotte", "Fraise", "Raisin",
+  "Arbre", "Forêt", "Montagne", "Rivière", "Océan", "Étoile", "Soleil", "Lune", "Pluie", "Nuage",
+  "Rouge", "Bleu", "Vert", "Jaune", "Noir", "Blanc", "Violet", "Orange", "Rose", "Gris",
+  "Médecin", "Pompier", "Enseignant", "Écrivain", "Architecte", "Ingénieur", "Avocat", "Coiffeur", "Peintre", "Pilote",
+  "Joie", "Tristesse", "Colère", "Peur", "Surprise", "Amour", "Déception", "Sérénité", "Enthousiasme", "Nostalgie",
+  "Voyage", "Mystère", "Histoire", "Aventure", "Magie", "Secret", "Passion", "Liberté", "Énergie", "Espoir"
 ];
 
 async function start() {

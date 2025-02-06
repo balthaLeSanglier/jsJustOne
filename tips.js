@@ -40,17 +40,30 @@ function checkTipsLetters(tipsList) {
   async function checkTipsPrononciation(tipsList, wordToGuess) {
     try {
         const prononciationWordToGuess = await getPronunciation(wordToGuess);
-        const pronunciationsIndice = await Promise.all(tipsList.map(el => getPronunciation(el)));
+        
+        const pronunciationsIndice = await Promise.all(
+            tipsList.map(async (el) => {
+                try {
+                    return await getPronunciation(el);
+                } catch (error) {
+                    console.warn(`Impossible d'obtenir la prononciation de "${el}", il sera ignoré.`);
+                    return null; // On ignore cet élément
+                }
+            })
+        );
 
-        console.log("Prononciation du mot à deviner:", prononciationWordToGuess);
-        console.log("Prononciations des indices:", pronunciationsIndice);
+        // console.log("Prononciation du mot à deviner:", prononciationWordToGuess);
+        // console.log("Prononciations des indices:", pronunciationsIndice);
 
-        return tipsList.filter((word, index) => pronunciationsIndice[index] !== prononciationWordToGuess);
+        return tipsList.filter((word, index) => 
+            pronunciationsIndice[index] !== null && pronunciationsIndice[index] !== prononciationWordToGuess
+        );
     } catch (error) {
         console.error("Erreur dans checkTipsPrononciation:", error);
-        throw error; // Propage l'erreur pour que l'appelant puisse la gérer
+        throw error;
     }
 }
+
 function getPronunciation(word) {
   const url = `https://fr.wiktionary.org/w/api.php?action=parse&format=json&origin=*&prop=text&page=${encodeURIComponent(word)}`;
 
