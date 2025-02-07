@@ -28,14 +28,17 @@ async function getFiveTips() {
     return tips;
   }
 
-function checkTipsLetters(tipsList) {
-    const seen = new Set();
-    return tipsList.filter(el => {
-      if (seen.has(el)) return false;
-      seen.add(el);
-      return true;
+function checkTipsLetters(tipsList, existingTip) {
+    const occurrences = new Map();
+
+    // Compter les occurrences de chaque mot
+    tipsList.forEach(word => {
+        occurrences.set(word, (occurrences.get(word) || 0) + 1);
     });
-  }
+
+    // Filtrer les mots qui apparaissent exactement une seule fois et ne sont pas `existingTip`
+    return tipsList.filter(word => occurrences.get(word) === 1 && word !== existingTip);
+}
 
   async function checkTipsPrononciation(tipsList, wordToGuess) {
     try {
