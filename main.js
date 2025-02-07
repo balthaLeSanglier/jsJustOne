@@ -62,7 +62,7 @@ async function start() {
 }
 
 function checkResponse(wordToGuess, response) {
-    win = wordToGuess==response
+    win = wordToGuess.toLowerCase()==response.toLowerCase()
     if(win) {
         console.log("BRAVO, c'est une victoire !")
     }
