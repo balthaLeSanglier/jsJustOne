@@ -5,23 +5,22 @@ const { createCardWords } = require('./wordUtils');
 const tips = require('./tips');
 
 const wordList = [
-  "javascript",
-  "golang",
-  "elm",
-  "gns",
-  "java",
-  "react",
-  "angular",
-  "Verre", "vert", "ver", "vair","vers","vaires",
-//   "Chat", "Chien", "Cheval", "Oiseau", "Dauphin", "Renard", "Hibou", "Lézard", "Tortue", "Souris",
-//   "Table", "Chaise", "Lampe", "Fenêtre", "Téléphone", "Ordinateur", "Clavier", "Miroir", "Livre", "Stylo",
-//   "Pomme", "Poire", "Banane", "Chocolat", "Fromage", "Pain", "Lait", "Carotte", "Fraise", "Raisin",
-//   "Arbre", "Forêt", "Montagne", "Rivière", "Océan", "Étoile", "Soleil", "Lune", "Pluie", "Nuage",
-//   "Rouge", "Bleu", "Vert", "Jaune", "Noir", "Blanc", "Violet", "Orange", "Rose", "Gris",
-//   "Médecin", "Pompier", "Enseignant", "Écrivain", "Architecte", "Ingénieur", "Avocat", "Coiffeur", "Peintre", "Pilote",
-//   "Joie", "Tristesse", "Colère", "Peur", "Surprise", "Amour", "Déception", "Sérénité", "Enthousiasme", "Nostalgie",
-//   "Voyage", "Mystère", "Histoire", "Aventure", "Magie", "Secret", "Passion", "Liberté", "Énergie", "Espoir"
- ];
+        "Javascript", "Golang", "Elm", "Gns", "Java", "React", "Angular",
+        "Verre", "Vert", "Ver", "Vair","Vers","Vaires",
+        "Chat", "Chien", "Cheval", "Oiseau", "Dauphin", "Renard", "Hibou", "Lézard", "Tortue", "Souris",
+        "Table", "Chaise", "Lampe", "Fenêtre", "Téléphone", "Ordinateur", "Clavier", "Miroir", "Livre", "Stylo",
+        "Pomme", "Poire", "Banane", "Chocolat", "Fromage", "Pain", "Lait", "Carotte", "Fraise", "Raisin",
+        "Arbre", "Forêt", "Montagne", "Rivière", "Océan", "Étoile", "Soleil", "Lune", "Pluie", "Nuage",
+        "Rouge", "Bleu", "Vert", "Jaune", "Noir", "Blanc", "Violet", "Orange", "Rose", "Gris",
+        "Médecin", "Pompier", "Enseignant", "Écrivain", "Architecte", "Ingénieur", "Avocat", "Coiffeur", "Peintre", "Pilote",
+        "Joie", "Tristesse", "Colère", "Peur", "Surprise", "Amour", "Déception", "Sérénité", "Enthousiasme", "Nostalgie",
+        "Voyage", "Mystère", "Histoire", "Aventure", "Magie", "Secret", "Passion", "Liberté", "Énergie", "Espoir",
+        "Football", "Basketball", "Tennis", "Natation", "Athlétisme", "Cyclisme", "Boxe", "Rugby", "Golf", "Ski",
+        "Carotte", "Tomate", "Concombre", "Poivron", "Courgette", "Aubergine", "Chou", "Épinard", "Radis", "Brocoli",
+        "Paris", "New York", "Londres", "Tokyo", "Berlin", "Madrid", "Rome", "Sydney", "Moscou", "Dubaï",
+        "France", "Espagne", "Italie", "Canada", "Japon", "Brésil", "Allemagne", "Chine", "Inde", "Mexique",
+        "Bouteille", "Sac", "Montre", "Lunettes", "Télévision", "Casque", "Tasse", "Vélo", "Voiture", "Couteau"
+    ];
 
 async function start() {
   console.log("Début du compte à rebours...");
