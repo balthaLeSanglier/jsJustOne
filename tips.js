@@ -19,14 +19,14 @@ async function getOneTip(index) {
   });
 }
 
-async function getFiveTips() {
+async function getFourTips() {
     let tips = [];
-    for (let i = 0; i < 5; i++) {
-      let tip = await getOneTip(i + 1);
-      tips.push(tip);
+    for (let i = 0; i < 4; i++) { // Nombre d'indices
+        let tip = await getOneTip(i + 1);
+        tips.push(tip);
     }
     return tips;
-  }
+}
 
 function checkTipsLetters(tipsList, existingTip) {
     const occurrences = new Map();
@@ -68,6 +68,7 @@ function checkTipsLetters(tipsList, existingTip) {
 }
 
 function getPronunciation(word) {
+    word = word.toLowerCase();
   const url = `https://fr.wiktionary.org/w/api.php?action=parse&format=json&origin=*&prop=text&page=${encodeURIComponent(word)}`;
 
   return fetch(url)
@@ -97,7 +98,7 @@ function getPronunciation(word) {
 
 module.exports = {
     getOneTip,
-    getFiveTips,
+    getFourTips,
     checkTipsLetters,
     checkTipsPrononciation
   };

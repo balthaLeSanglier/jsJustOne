@@ -31,19 +31,19 @@ async function start() {
   
   let nbOfNumber;
   while (true) {
-      nbOfNumber = await askQuestion("Choisissez un nombre entre 1 et 5 : ");
-      nbOfNumber = parseInt(nbOfNumber, 10); 
-      if (!isNaN(nbOfNumber) && nbOfNumber >= 1 && nbOfNumber <= 5) {
-          break;
-      }
-      console.log("Entrée invalide. Veuillez entrer un nombre entre 1 et 5.");
-  }
+    nbOfNumber = await askQuestion("Choisissez un nombre entre 1 et 5 : ");
+    nbOfNumber = parseInt(nbOfNumber, 10); 
+    if (!isNaN(nbOfNumber) && nbOfNumber >= 1 && nbOfNumber <= 5) {
+        break;
+    }
+    console.log("Entrée invalide. Veuillez entrer un nombre entre 1 et 5.");
+}
   
   const wordToGuess = wordToGuessList[nbOfNumber - 1];
   console.log("Le mot choisi est : " + wordToGuess);
   console.log("C'est parti pour les indices !");
   
-  let tipsList = await tips.getFiveTips();
+  let tipsList = await tips.getFourTips();
   console.log("Okay, les indices sont collectés. Vérification des indices");
   try {
         tipsList = await tips.checkTipsPrononciation(tipsList, wordToGuess);
